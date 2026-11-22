@@ -1,0 +1,88 @@
+# Python virtual environments
+/.venv/
+/venv/
+/env/
+/ENV/
+**/.venv/
+**/venv/
+**/env/
+**/ENV/
+/.tox/
+/.nox/
+
+# Datasets and local audio (including competition inventories and downloads)
+/data/
+
+# Kaggle and other local credentials
+**/.kaggle/
+**/kaggle.json
+**/credentials.json
+**/credentials.ini
+**/secrets.json
+.env
+.env.*
+!.env.example
+**/*.pem
+**/*.p12
+**/*.pfx
+**/private.key
+
+# Python caches and test/type-check output
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter transient state
+.ipynb_checkpoints/
+
+# Generated model weights and serialized model artifacts
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.hdf5
+*.keras
+*.safetensors
+*.tflite
+*.pb
+*.joblib
+pytorch_model.bin
+
+# Temporary downloads, partials, and staging state
+*.part
+*.partial
+*.tmp
+*.download
+*.crdownload
+*.aria2
+*.kaggle-partial
+/.birdclef_*_staging/
+**/.birdclef_*_staging/
+/data/raw/.birdclef_2026_approved_staging/
+**/.staging/
+
+# Build and generated package output
+/build/
+/dist/
+*.egg-info/
+
+# Operating system and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+*.log
+*.swp
+*.swo
+*~
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/shelf/
+.vscode/*.log
+.history/

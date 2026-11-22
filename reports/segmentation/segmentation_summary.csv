@@ -1,0 +1,7 @@
+filename,original_duration_seconds,original_sample_count,complete_segments,remaining_duration_seconds,coverage_percentage
+train_audio/rubthr1/XC1006659.ogg,12.251,392032,2,2.251,81.62598971512529
+train_audio/banana/XC1034681.ogg,6.582,210624,1,1.582,75.96475235490733
+train_audio/fepowl/XC1034537.ogg,16.535,529120,3,1.535,90.71666162685213
+train_audio/bafcur1/XC1018568.ogg,59.688,1910016,11,4.688,92.14582495644017
+train_audio/22973/XC892927.ogg,37.248,1191936,7,2.248,93.9647766323024
+train_audio/244024/iNat103300.ogg,27.19784375,870331,5,2.19784375,91.9190514873077
