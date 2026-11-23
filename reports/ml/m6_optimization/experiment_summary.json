@@ -1,0 +1,64 @@
+{
+  "candidate_count": 15,
+  "class_order": [
+    "compot1",
+    "rufhor2",
+    "saytan1",
+    "crbthr1",
+    "rutjac1",
+    "rufnig1",
+    "chobla1",
+    "burowl"
+  ],
+  "embedding_dimension": 1024,
+  "execution_device": "CPU (scikit-learn estimators; GPU not used)",
+  "final_fit_seconds": 8.633894599999621,
+  "final_model_path": "models\\m6_optimization\\selected_classifier.joblib",
+  "final_model_sha256": "f9550fa0e5b5e8652d2f96059bc46785a86c94cd1aafd7fff10ab746664b18df",
+  "fit_seconds_total_cv_and_final": 80.42519260000336,
+  "folds": 5,
+  "gpu_available_but_not_used": true,
+  "gpu_model": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "grouping": "existing author/content group_id",
+  "holdout_used": false,
+  "input": "existing M5 frozen YAMNet recording embeddings",
+  "input_path": "data\\processed\\m5_yamnet\\train_embeddings.npz",
+  "milestone": "M6 model optimization",
+  "package_versions": {
+    "joblib": "1.6.0",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1"
+  },
+  "preprocessing": "StandardScaler fitted inside each fold for LR/SVM; no validation-fold fitting; RF unscaled.",
+  "python_version": "3.14.7",
+  "roc_auc": "Not reported: selection used hard-label macro-F1; SVM scores are not calibrated probabilities.",
+  "scope": "eight-class interim task; training partition only",
+  "seed": 42,
+  "selected_cv": {
+    "mean_accuracy": 0.5995528523822976,
+    "mean_macro_f1": 0.5971812481993591,
+    "mean_precision_macro": 0.6087327401296918,
+    "mean_recall_macro": 0.6026084912887303,
+    "mean_weighted_f1": 0.5959407367817958,
+    "std_macro_f1": 0.051659572235803336
+  },
+  "selected_model": "logistic_regression",
+  "selected_oof_metrics": {
+    "accuracy": 0.5989702517162472,
+    "macro_f1": 0.5928637057334276,
+    "precision_macro": 0.5991817386265454,
+    "recall_macro": 0.5920386132639591,
+    "weighted_f1": 0.5980590013097438
+  },
+  "selected_parameters": {
+    "C": 0.1,
+    "class_weight": "balanced",
+    "max_iter": 4000,
+    "random_state": 42
+  },
+  "selection_metric": "mean five-fold training-side macro-F1",
+  "splitter": "StratifiedGroupKFold",
+  "stratification": "primary_label \u00d7 collection",
+  "training_recordings": 1748
+}

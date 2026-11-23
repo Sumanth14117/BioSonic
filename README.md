@@ -29,12 +29,12 @@ In M5, resampling produced finite values outside the nominal `[-1, 1]` waveform 
 | M3 | Traditional machine learning | Complete for the eight-class interim experiment |
 | M4 | Custom CNN development and evaluation | Complete for the eight-class interim experiment |
 | M5 | Transfer learning and model comparison | Complete for the eight-class interim experiment |
-| M6 | Multi-species soundscape detection | Planned |
+| M6 | Model optimization and improvement | Complete as a training-only optimization study; no improvement over the existing best M3 CV result |
 | M7 | Explainability and biodiversity analytics | Planned |
 | M8 | FastAPI backend and React/TypeScript frontend | Planned |
 | M9 | Testing, deployment, documentation, and portfolio release | Planned |
 
-M6–M9 are not implemented. Acoustic activity estimates must not be presented as direct wildlife population estimates.
+M6 tested 15 classifier configurations on existing frozen YAMNet embeddings using author/content-grouped CV on the 1,748-recording training partition. Balanced Logistic Regression (`C=0.1`) remained the best M6 candidate at macro-F1 0.5972 ± 0.0517, matching the prior M5 baseline; the M3 RBF SVM remains the strongest comparable training-CV result at 0.6575 ± 0.0397. The reused holdout was not accessed. See [the M6 optimization report](reports/ml/m6_optimization/m6_optimization_report.md). M7–M9 remain planned. Acoustic activity estimates must not be presented as direct wildlife population estimates.
 
 ## Environments and commands
 
@@ -56,10 +56,11 @@ py -3.12 -m venv .venv-yamnet
 & .\.venv-yamnet\Scripts\python.exe -m pip install -r requirements-yamnet.txt
 ```
 
-The current test suites were last verified during the project audit: 78 tests passed in `.venv` (M3, M4, downloader) and 13 passed in `.venv-yamnet` (M5). Example commands from the repository root:
+The current test suites were verified after M6: 84 tests passed in `.venv` (M3, M4, downloader, M6) and 13 passed in `.venv-yamnet` (M5). Example commands from the repository root:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest tests\test_download_approved_audio.py tests\test_m3_pipeline.py tests\test_m4_cnn.py -v
+.\.venv\Scripts\python.exe -m pytest tests\test_m6_optimization.py -v
 & .\.venv-yamnet\Scripts\python.exe -m pytest tests\test_m5_yamnet.py -v
 ```
 
@@ -77,6 +78,7 @@ From the repository root, the workflow entry points accept these stages:
 & .\.venv-yamnet\Scripts\python.exe scripts\run_m5_yamnet.py --stage smoke
 & .\.venv-yamnet\Scripts\python.exe scripts\run_m5_yamnet.py --stage extract-train
 & .\.venv-yamnet\Scripts\python.exe scripts\run_m5_yamnet.py --stage train-freeze
+.\.venv\Scripts\python.exe scripts\run_m6_optimization.py --run-id run_02
 ```
 
 These are reproducibility references, not commands to rerun during review. They may regenerate caches, models, or reports. M5 `evaluate-holdout` is intentionally omitted from routine development instructions because the shared holdout has already been evaluated; do not run it for tuning.

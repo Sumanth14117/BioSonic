@@ -1,0 +1,36 @@
+{
+  "class_order": [
+    "compot1",
+    "rufhor2",
+    "saytan1",
+    "crbthr1",
+    "rutjac1",
+    "rufnig1",
+    "chobla1",
+    "burowl"
+  ],
+  "embedding_dimension": 1024,
+  "execution_device": "CPU (scikit-learn estimators; GPU not used)",
+  "gpu_available_but_not_used": true,
+  "gpu_model": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "holdout_used": false,
+  "model_bytes": 58969,
+  "model_family": "logistic_regression",
+  "model_file": "selected_classifier.joblib",
+  "model_sha256": "f9550fa0e5b5e8652d2f96059bc46785a86c94cd1aafd7fff10ab746664b18df",
+  "package_versions": {
+    "joblib": "1.6.0",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1"
+  },
+  "parameters": {
+    "C": 0.1,
+    "class_weight": "balanced",
+    "max_iter": 4000,
+    "random_state": 42
+  },
+  "seed": 42,
+  "training_recordings": 1748,
+  "validation": "5-fold StratifiedGroupKFold; training partition only"
+}
