@@ -33,6 +33,7 @@ MAX_FILE_WAIT_SECONDS = 30 * 60
 BACKOFF_INITIAL_SECONDS = 60
 BACKOFF_MAX_SECONDS = 15 * 60
 SUCCESS_REQUEST_DELAY_SECONDS = 1.5
+MANIFEST_REPLACE_RETRY_DELAYS_SECONDS = (0.1, 0.2, 0.4, 0.8)
 
 
 class RetryBudgetExceeded(RuntimeError):
@@ -576,7 +577,17 @@ def save_manifest(frame: pd.DataFrame) -> None:
     MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
     temporary = MANIFEST_PATH.with_suffix(".csv.tmp")
     frame.to_csv(temporary, index=False)
-    os.replace(temporary, MANIFEST_PATH)
+    for attempt in range(len(MANIFEST_REPLACE_RETRY_DELAYS_SECONDS) + 1):
+        try:
+            os.replace(temporary, MANIFEST_PATH)
+            return
+        except PermissionError as exc:
+            if attempt == len(MANIFEST_REPLACE_RETRY_DELAYS_SECONDS):
+                raise PermissionError(
+                    f"Unable to atomically replace manifest after {attempt + 1} attempts; "
+                    f"complete temporary manifest preserved at {temporary}"
+                ) from exc
+            time.sleep(MANIFEST_REPLACE_RETRY_DELAYS_SECONDS[attempt])
 
 
 def inspect_audio(path: Path) -> tuple[bool, str, dict]:
@@ -664,9 +675,8 @@ def write_summary(frame: pd.DataFrame, start_files: set[str], stop_reason: str =
         "the competition-wide archive endpoint is not used. Kaggle's downloader retries network failures "
         "and supports identity-checked byte-range resume. Each validated staged file is atomically moved "
         "into `data/raw/train_audio/<label>/<filename>` only if that destination does not already exist.",
-        "The file-list command was `.venv\\Scripts\\kaggle.exe competitions files birdclef-2026 "
-        "--page-size 200 --format csv --quiet`. A single-file CLI retry was attempted for "
-        "`train_audio/chobla1/iNat986933.ogg`; it returned an authentication-required message.",
+        "Source paths and expected sizes are validated against the approved inventory before "
+        "requests. Authentication details and per-file operational errors are not included in this summary.",
         "", "From the BioSonic project root, resume with:", "", "```powershell",
         ".\\.venv\\Scripts\\python.exe scripts\\download_approved_audio.py", "```",
         "The script reconstructs and validates the fixed approved list before any request, skips files "

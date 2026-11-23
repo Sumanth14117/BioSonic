@@ -1,0 +1,12 @@
+{
+  "accuracy": 0.7236842105263158,
+  "f1_macro": 0.7602543943352449,
+  "f1_weighted": 0.7111459758829078,
+  "inference_ms_per_record": 24.314597039464342,
+  "inference_seconds": 7.3916374999971595,
+  "precision_macro": 0.8194742610826602,
+  "recall_macro": 0.7768545191326834,
+  "recording_count": 304,
+  "roc_auc_ovr_macro": 0.9330848590967722,
+  "segment_loss": 5.072089450206783
+}

@@ -1,0 +1,35 @@
+{
+  "best_model_artifact": "models\\m3_eight_class\\best_model.joblib",
+  "best_model_by_training_cv": "svm",
+  "class_labels": [
+    "compot1",
+    "rufhor2",
+    "saytan1",
+    "crbthr1",
+    "rutjac1",
+    "rufnig1",
+    "chobla1",
+    "burowl"
+  ],
+  "cv_splits": 5,
+  "feature_scaling": "StandardScaler is inside Logistic Regression and SVM sklearn pipelines; Random Forest unscaled.",
+  "models": [
+    "logistic_regression",
+    "random_forest",
+    "svm"
+  ],
+  "package_versions": {
+    "librosa": "1.0.1",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "soundfile": "0.14.0"
+  },
+  "primary_selection_metric": "mean group-aware training CV macro-F1",
+  "python_version": "3.14.7",
+  "seed": 42,
+  "tuning_scope": "Training partition only; final grouped holdout is not used for model or hyperparameter selection.",
+  "validation_used_only_for_final_evaluation": true
+}

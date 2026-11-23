@@ -1,0 +1,12 @@
+{
+  "classifier_bytes": 55838,
+  "classifier_holdout_inference_ms_per_recording": 0.08274289044781669,
+  "cv_search_seconds": 101.4521339999992,
+  "final_classifier_refit_seconds": 1.216027700000268,
+  "holdout_embedding_extraction_wall_seconds": 956.1603307999976,
+  "holdout_yamnet_mean_seconds_per_recording": 0.17228459254079045,
+  "training_aggregate_reconstruction_wall_seconds": 26.158027099998435,
+  "training_yamnet_inference_seconds": 337.3981587001472,
+  "yamnet_checkpoint_bytes": 15296092,
+  "yamnet_parameters": 3751369
+}

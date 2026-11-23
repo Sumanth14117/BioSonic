@@ -1,0 +1,5 @@
+model,milestone,cv_macro_f1,internal_validation_macro_f1,holdout_accuracy,holdout_macro_precision,holdout_macro_recall,holdout_macro_f1,holdout_weighted_f1,holdout_roc_auc_ovr_macro,note
+M3 logistic_regression,M3,0.6549845192866142,,0.682983682983683,0.6857416880054195,0.6773310441823617,0.6769210878129417,0.6853465354065107,0.9243720416091796,Existing M3 holdout result; same 429 recordings; M3 CV only inside M3 training.
+M3 random_forest,M3,0.6017073927678629,,0.6433566433566433,0.6507145632102815,0.626042155458804,0.6315415269128337,0.6393874641504839,0.9060634159407316,Existing M3 holdout result; same 429 recordings; M3 CV only inside M3 training.
+M3 svm,M3,0.6575294972453604,,0.6573426573426573,0.6678915801662011,0.6400308022136746,0.6431191222070267,0.6548087816620347,,Existing M3 holdout result; same 429 recordings; M3 CV only inside M3 training.
+M4 custom CNN,M4,,0.7602543943352449,0.8787878787878788,0.8912831524770379,0.8691850346807337,0.8725948079461243,0.8768098137744105,0.9851292129882829,"Selected on internal validation, then scored on prior M3 holdout; not a newly untouched test."

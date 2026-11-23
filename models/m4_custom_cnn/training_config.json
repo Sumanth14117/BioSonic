@@ -1,0 +1,41 @@
+{
+  "architecture": "Custom BioSonicCNN; four ConvBlock stages; no pretrained weights",
+  "batch_size": 32,
+  "block": "two Conv2d(3x3)-BatchNorm-ReLU layers, MaxPool2d(2), Dropout2d",
+  "channels": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "class_order": [
+    "compot1",
+    "rufhor2",
+    "saytan1",
+    "crbthr1",
+    "rutjac1",
+    "rufnig1",
+    "chobla1",
+    "burowl"
+  ],
+  "classifier": "128-unit Linear-ReLU-Dropout-8 logits",
+  "device": "cuda",
+  "early_stopping_patience": 6,
+  "input_shape": [
+    1,
+    128,
+    622
+  ],
+  "learning_rate": 0.0003,
+  "loss": "CrossEntropyLoss",
+  "max_epochs": 30,
+  "normalization_fit_partition": "internal_train",
+  "num_classes": 8,
+  "optimizer": "AdamW",
+  "output": "raw logits; CrossEntropyLoss",
+  "pooling": "AdaptiveAvgPool2d((1,1))",
+  "sampler": "class-balanced, recording-balanced weighted segment sampler",
+  "seed": 42,
+  "trainable_parameters": 311256,
+  "weight_decay": 0.0001
+}

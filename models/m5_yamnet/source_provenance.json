@@ -1,0 +1,44 @@
+{
+  "audioset_dataset_license": "CC BY 4.0; not the model-weight license",
+  "audioset_ontology_license": "CC BY-SA 4.0",
+  "google_storage_headers": {
+    "content_length": 15296092,
+    "etag_md5": "8234225c045859752bd4a2e101f8cd1a",
+    "generation": "1574101619169609",
+    "x_goog_hash_crc32c_base64": "HZOGFQ==",
+    "x_goog_hash_md5_base64": "gjQiXARYWXUr1KLhAfjNGg=="
+  },
+  "model": "Google YAMNet TensorFlow 2 version 1",
+  "model_license": "Apache-2.0 per official Google YAMNet model listing",
+  "official_model_listing": "https://tfhub.dev/google/yamnet/1",
+  "official_weights_url": "https://storage.googleapis.com/audioset/yamnet.h5",
+  "source_commit": "c14bf9ad91962cf189f9f58db2132c06247fcd53",
+  "source_commit_signature_verified": true,
+  "source_files": {
+    "LICENSE": {
+      "bytes": 11512,
+      "sha256": "5b17814bf0de8cf65069bc6d7cc38cff19fcaa864d243423ad3ef3db01b52385"
+    },
+    "features.py": {
+      "bytes": 7490,
+      "sha256": "e6cd53f81d072c7c43be4c7fff2b9dd0c5ccc7d64f2fbcfc85b44013d6d2ed5e"
+    },
+    "params.py": {
+      "bytes": 1847,
+      "sha256": "925bb1e62461016031f98aea09aeac28975dd516f5747513767de5d1b06b6145"
+    },
+    "yamnet.py": {
+      "bytes": 5541,
+      "sha256": "7ef3df32b7ecb782490b5a04d7581a23cfcf701dbf476bc4d03deefe22cdb040"
+    },
+    "yamnet_class_map.csv": {
+      "bytes": 14096,
+      "sha256": "cdf24d193e196d9e95912a2667051ae203e92a2ba09449218ccb40ef787c6df2"
+    }
+  },
+  "source_license": "Apache-2.0 for TensorFlow Models research tree",
+  "source_repository": "https://github.com/tensorflow/models",
+  "weights_bytes": 15296092,
+  "weights_md5": "8234225c045859752bd4a2e101f8cd1a",
+  "weights_sha256": "13c3308955bbfaef262f175ac9c40e47b134573a93984f009220dd7cc12a1744"
+}

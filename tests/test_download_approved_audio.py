@@ -56,6 +56,96 @@ class FailingInitialResponse(FakeResponse):
 
 
 class DownloaderRetryTests(unittest.TestCase):
+    def _manifest_save_fixture(self, root: pathlib.Path):
+        manifest = root / "download_manifest.csv"
+        temporary = root / "download_manifest.csv.tmp"
+        manifest.write_bytes(b"existing manifest\n")
+        frame = pd.DataFrame({"filename": ["bird/example.ogg"], "status": ["verified"]})
+        return manifest, temporary, frame
+
+    def test_manifest_replace_retries_permission_error_then_succeeds(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest, temporary, frame = self._manifest_save_fixture(pathlib.Path(tmp))
+            original_replace = downloader.os.replace
+            calls = []
+
+            def transient_then_success(source, destination):
+                calls.append((source, destination))
+                if len(calls) == 1:
+                    raise PermissionError("transient sharing violation")
+                return original_replace(source, destination)
+
+            with mock.patch.object(downloader, "MANIFEST_PATH", manifest), mock.patch.object(
+                downloader.os, "replace", side_effect=transient_then_success
+            ), mock.patch.object(downloader.time, "sleep") as sleep, mock.patch.object(
+                frame, "to_csv", wraps=frame.to_csv
+            ) as write_csv:
+                downloader.save_manifest(frame)
+
+            self.assertEqual(len(calls), 2)
+            self.assertEqual([c.args[0] for c in sleep.call_args_list], [0.1])
+            write_csv.assert_called_once_with(temporary, index=False)
+            self.assertFalse(temporary.exists())
+            self.assertEqual(pd.read_csv(manifest).to_dict("records"), frame.to_dict("records"))
+
+    def test_manifest_replace_retries_multiple_transient_failures(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest, temporary, frame = self._manifest_save_fixture(pathlib.Path(tmp))
+            original_replace = downloader.os.replace
+            calls = []
+
+            def transient_twice_then_success(source, destination):
+                calls.append((source, destination))
+                if len(calls) < 3:
+                    raise PermissionError("transient sharing violation")
+                return original_replace(source, destination)
+
+            with mock.patch.object(downloader, "MANIFEST_PATH", manifest), mock.patch.object(
+                downloader.os, "replace", side_effect=transient_twice_then_success
+            ), mock.patch.object(downloader.time, "sleep") as sleep, mock.patch.object(
+                frame, "to_csv", wraps=frame.to_csv
+            ) as write_csv:
+                downloader.save_manifest(frame)
+
+            self.assertEqual(len(calls), 3)
+            self.assertEqual([c.args[0] for c in sleep.call_args_list], [0.1, 0.2])
+            write_csv.assert_called_once_with(temporary, index=False)
+            self.assertFalse(temporary.exists())
+
+    def test_manifest_replace_exhaustion_preserves_main_and_complete_temp(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest, temporary, frame = self._manifest_save_fixture(pathlib.Path(tmp))
+            original_main = manifest.read_bytes()
+            with mock.patch.object(downloader, "MANIFEST_PATH", manifest), mock.patch.object(
+                downloader.os, "replace", side_effect=PermissionError("persistent sharing violation")
+            ) as replace, mock.patch.object(downloader.time, "sleep") as sleep, mock.patch.object(
+                frame, "to_csv", wraps=frame.to_csv
+            ) as write_csv:
+                with self.assertRaisesRegex(PermissionError, "complete temporary manifest preserved"):
+                    downloader.save_manifest(frame)
+
+            self.assertEqual(replace.call_count, 5)
+            self.assertEqual([c.args[0] for c in sleep.call_args_list], [0.1, 0.2, 0.4, 0.8])
+            write_csv.assert_called_once_with(temporary, index=False)
+            self.assertEqual(manifest.read_bytes(), original_main)
+            self.assertTrue(temporary.is_file())
+            self.assertEqual(pd.read_csv(temporary).to_dict("records"), frame.to_dict("records"))
+
+    def test_manifest_replace_does_not_retry_non_permission_errors(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest, temporary, frame = self._manifest_save_fixture(pathlib.Path(tmp))
+            original_main = manifest.read_bytes()
+            with mock.patch.object(downloader, "MANIFEST_PATH", manifest), mock.patch.object(
+                downloader.os, "replace", side_effect=OSError("disk error")
+            ) as replace, mock.patch.object(downloader.time, "sleep") as sleep:
+                with self.assertRaisesRegex(OSError, "disk error"):
+                    downloader.save_manifest(frame)
+
+            replace.assert_called_once_with(temporary, manifest)
+            sleep.assert_not_called()
+            self.assertEqual(manifest.read_bytes(), original_main)
+            self.assertTrue(temporary.is_file())
+
     def test_summary_resume_instructions_are_project_relative(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)

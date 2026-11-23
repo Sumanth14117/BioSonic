@@ -1,3 +1,5 @@
+> **Historical strategy — superseded.** This document preserves the original proposed 12-class strategy, including its 676-recording validation fold. That design is not the methodology used for the completed eight-class experiments. The current strategy is documented in [eight_class_validation_strategy.md](eight_class_validation_strategy.md). Retained below for project history; do not use this plan to reproduce current M3–M5 results.
+
 # M3 Step 3 — Leakage-Safe Validation Strategy
 
 **Scope:** Finalized design for the initial 12-species, single-label bird classification task. Split assignments and SHA-256 comparisons were checked in memory only; no split manifest was saved. No audio was downloaded or modified, and no models or preprocessing transformations were fitted. A read-only local-audio snapshot was hashed while the separate download was active; it must be repeated after download completion before creating the split manifest.

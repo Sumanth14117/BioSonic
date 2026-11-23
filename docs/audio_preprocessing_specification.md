@@ -190,3 +190,7 @@ This is a separate task over five-second soundscape intervals, with multiple sim
 9. Perform error analysis by species, collection/source, and recording conditions.
 
 M3 should begin only after the split and label policies are reviewed. No preprocessing or model configuration in this specification has been applied to the source audio.
+
+## Dataset provenance and licensing
+
+The exploratory audio and figures described here were derived from BirdCLEF+ 2026 competition recordings. Attribute BirdCLEF+ 2026 and original recording contributors; the dataset is subject to CC BY-NC-SA 4.0 and the competition rules. BioSonic does not claim ownership of these recordings or dataset-derived material. The root Apache-2.0 license applies to original BioSonic source code only and does not replace dataset, model, checkpoint, or vendored-code terms.

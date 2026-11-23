@@ -1,0 +1,46 @@
+{
+  "classes": [
+    {
+      "index": 0,
+      "primary_label": "compot1"
+    },
+    {
+      "index": 1,
+      "primary_label": "rufhor2"
+    },
+    {
+      "index": 2,
+      "primary_label": "saytan1"
+    },
+    {
+      "index": 3,
+      "primary_label": "crbthr1"
+    },
+    {
+      "index": 4,
+      "primary_label": "rutjac1"
+    },
+    {
+      "index": 5,
+      "primary_label": "rufnig1"
+    },
+    {
+      "index": 6,
+      "primary_label": "chobla1"
+    },
+    {
+      "index": 7,
+      "primary_label": "burowl"
+    }
+  ],
+  "order": [
+    "compot1",
+    "rufhor2",
+    "saytan1",
+    "crbthr1",
+    "rutjac1",
+    "rufnig1",
+    "chobla1",
+    "burowl"
+  ]
+}
