@@ -1,0 +1,6 @@
+# Optional M8 local API runtime dependencies.
+# Verified in the existing .venv: FastAPI 0.165.0, Uvicorn 0.54.0, python-multipart 0.0.34.
+# These ranges describe API compatibility, not a complete locked environment.
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+python-multipart>=0.0.20,<1

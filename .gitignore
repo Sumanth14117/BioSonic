@@ -73,6 +73,11 @@ pytorch_model.bin
 /dist/
 *.egg-info/
 
+# React/Vite frontend build and local dependencies
+**/node_modules/
+/frontend/dist/
+/frontend/coverage/
+
 # Operating system and editor temporary files
 .DS_Store
 Thumbs.db
